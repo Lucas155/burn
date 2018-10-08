@@ -12,6 +12,6 @@ app.use(expressValidator());
 
 consign().include('routes').include('utils').into(app);
 
-app.listen(process.env.Port, process.env.Host, () => {
+app.listen(process.env.PORT, process.env.HOST, () => {
     console.log('servidor rodando!');
 });
