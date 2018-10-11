@@ -1,0 +1,150 @@
+<html>
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+
+            <!DOCTYPE HTML>
+
+            <html lang="en-us">
+            
+            <head>
+                <title>Burndown</title>
+            
+                <link rel="stylesheet" href="../css/style.css">
+                <link rel="stylesheet" href="../css/modal.css">
+            
+            
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+                    crossorigin="anonymous">
+            
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+            
+                <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+            
+                <script src="../js/Chart.bundle.js"></script>
+                <script src="../js/utils.js"></script>
+                
+            
+            </head>
+            
+            <body>
+            
+                <nav>
+                    <h1>Burndown</h1>
+                    <ul>
+            
+                        <li>
+                            <i class="fas fa-home"></i>
+                            <a href="">Home</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <a href="">Burndown</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-bar"></i>
+                            <a href="">Novo Burndown</a>
+                        </li>
+            
+                    </ul>
+            
+                </nav>
+            
+                <main>
+            
+                    <div class="burndown">
+            
+                        <canvas id="canvas"></canvas>
+                        <!--
+                        <br>
+                        <br>
+                        <button id="randomizeData">Randomize Data</button>
+                        <button id="addDataset">Add Dataset</button>
+                        <button id="removeDataset">Remove Dataset</button>
+                        <button id="addData">Add Data</button>
+                        <button id="removeData">Remove Data</button>
+                -->
+            
+                    </div>
+            
+                    <section class="modal-content">
+                        <a href="javascript:;" class="toggle-modal" onclick="toggleModal()">
+                            Abrir Modal
+                            <i class="fas fa-arrow-circle-up">&nbsp;</i>
+                        </a>
+                        <div class="bloco-caos">
+            
+                            <form id="pega-form" method="post" action="home" enctype="multipart/form-data"> 
+                                <div class="grupo">
+                                    <label>Remaning Tasks</label>
+                                    <input id="remaning" name="remaning" type="number" value="2"; placeholder="" class="campo campo-medio">
+                                </div>
+                                <div class="grupo">
+                                    <label>Extra Tasks</label>
+                                    <input id="extra" name="extra" type="number" placeholder="" class="campo campo-medio">
+                                </div>
+                                <div class="grupo">
+                                    <label>Bugs</label>
+                                    <input id="bugs" name="bugs" type="number" placeholder="" class="campo campo-medio">
+                                </div>
+                                <div class="grupo">
+                                    <label>Improvements</label>
+                                    <input id="improvements" name="improvements" type="number" placeholder="" class="campo campo-medio">
+                                </div>
+                                <div class="grupo">
+                                    <label>Date</label>
+                                    <input id="date" name="date" type="text" placeholder="" class="campo campo-medio">
+                                </div>
+            
+                                <button id="button"class="enviar">Enviar</button>
+            
+                            </form>
+                        </div>
+                    </section>
+                </main>
+            
+                <script src="../js/chart.js"></script>
+                <script src="../js/modal.js"></script>
+                <script type="text/javascript" src="https://www.browsealoud.com/plus/scripts/ba.js"></script>
+            
+            
+            
+            </body>
+            
+            
+            </html>
+        
+        <script>
+            $(document).ready(function() {
+                var pontos = [];
+                var extras = [];
+                var dias = [];
+
+                $.ajax({
+                    url: 'http://localhost:3000/burn',
+                    type: 'GET', //POST GET DELETE PUT
+                    //async: true,
+                    //data: {chave: valor},
+                    success: function(resposta) {
+                        $.each(resposta, function(indice, valores) {
+                            pontos.push(valores.points);
+                            extras.push(valores.extra_task);
+                            dias.push(valores.data);
+                        });
+                        console.log(pontos);
+                        console.log(extras);
+                        console.log(dias);
+                    },
+                    error: function(error) {
+                        //Tratar Erro
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+ /*[BLOCO DO CAOS]*/
+
+ .modal-content {
+    position: absolute;
+    width: calc(100% - 200px);
+    bottom: 0;
+    right: 0;
+}
+
+.modal-content .toggle-modal {
+    float: right;
+    margin-right: 10px;
+    padding: 8px 15px;
+    background: #FFF;
+    border-radius: 5px 5px 0 0;
+}
+
+.bloco-caos {
+    float: right;
+    width: calc(100% - 60px);
+    padding: 0 30px;
+    background: #FFF;
+    height: 0;
+    overflow: hidden;
+    transition: all ease-in-out 0.4s;
+}
+
+.bloco-caos.open {
+    height: 200px;
+}
+
+.burndown {
+    position: relative;
+    width: 70%;
+    margin: 40px 0 0 15%;
+
+
+}
+
+.enviar {
+    position: relative;
+    left: 600px;
+    top: 30px;
+    background-color: rgb(75, 126, 221);
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    display: block;
+    padding: 10px;
+
+}
+
