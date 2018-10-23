@@ -30,38 +30,31 @@ function updateChart(total, date, type) {
 function updateOnDatabase(total, date, dataset) {
     //TODO Requisição para o banco
 }
-//
+/*
+var enviar = addEventListener('click', function(event){
+                
+    var pega = document.querySelector('#pega-form');
+    var points = pega.points.value;
+    console.log(points);
 
-var enviar = document.querySelector("#button");
-enviar.addEventListener("click", function (event) {
-    //event.preventDefault();
-
-
-     for(var chave in lista)
-     
+});
+*/
 
 
 
 
    
-    if (remaning) updateChart(remaning, date, REMANING_DATASET);
-    if (extra) updateChart(extra, date, EXTRA_DATASET);
-    if (bugs) updateChart(bugs, date, BUGS_DATASET);
-    if (improvements) updateChart(improvements, date, IMPROVEMENTS_DATASET);
-    mySpecialChart.update();
+  //   if (pontos) updateChart(pontos, date, REMANING_DATASET);
+    // if (extras) updateChart(extras, date, EXTRA_DATASET);
+
+
+  //mySpecialChart.update();
     
-    //data.push(extra);
-    //data.push(bugs);
-    //data.push(improvements);
-
-    //console.log(data);
-    // var primeiraLinha = mySpecialChart.data.datasets[1];
-    // primeiraLinha.data.push(data);
-    // mySpecialChart.update();
+    
 
 
 
-});
+// });
 
 function createDataset(color, name) {
     return {
@@ -84,10 +77,8 @@ var config = {
     data: {
         labels: [],
         datasets: [
-            createDataset(window.chartColors.red, 'Remaning Tasks'),
+            createDataset(window.chartColors.red, 'Points'),
             createDataset(window.chartColors.blue, 'Extra Tasks'),
-            createDataset(window.chartColors.purple, 'Bugs'),
-            createDataset(window.chartColors.green, 'Improvements'),
             createDataset(window.chartColors.black, 'metrica'),
 
         ]
