@@ -29,7 +29,7 @@ module.exports = app => {
 
   app.post('/burn', (req, res) => {
     if (!app.utils.validador.validar(app, req, res)) return false;
-
+    console.log(req.body);
     points = req.body.points.substring(0, 150);
     extra_task = req.body.extra_task;
     data = req.body.data;

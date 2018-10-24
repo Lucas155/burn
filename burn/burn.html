@@ -102,7 +102,7 @@
 
         <script src="../burn/js/chart.js"></script>
         <script src="../burn/js/modal.js"></script>
-        <script type="text/javascript" src="https://www.browsealoud.com/plus/scripts/ba.js"></script>
+        <script src="../burn/js/ajax.js"></script>
 
 
 
@@ -111,58 +111,9 @@
 
     </html>
 
-    <script>
-        $(document).ready(function () {
-            var pontos = [];
-            var extras = [];
-            var dias = [];
+    
 
-            $.ajax({
-                url: 'http://localhost:3000/burn',
-                type: 'GET', //POST GET DELETE PUT
-                //async: true,
-                //data: {chave: valor},
-                success: function (resposta) {
-                  //console.log(resposta);
-                    $.each(resposta, function (indice, valores) {
-                        pontos.push(valores.points);
-                        extras.push(valores.extra_task);
-                        dias.push(valores.data);
-                    });
-                    /*
-                    console.log(pontos);
-                    console.log(extras);
-                    console.log(dias);
-                    */
-                },
-                error: function (error) {
-                    //Tratar Erro
-                }
-            });
-            
-            
-            
-            
-            $('#pega-form').on('submit', function() {
-            var form = this;
-            console.log(form);
-                $.ajax({
-                    url: 'http://localhost:3000/burn',
-                    type: 'POST', //POST GET DELETE PUT
-                    async: true,
-                    data:$(form).serialize(),
-                    success: function (resposta) {
-                        console.log(resposta);
-
-                    },
-                    error: function (error) {
-                        //Tratar Erro
-                    }
-                });
-            });
-        });
-
-    </script>
+    
 </body>
 
 </html>

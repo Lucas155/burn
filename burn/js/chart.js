@@ -1,72 +1,13 @@
-//modal
-const   REMANING_DATASET = 0,
-        EXTRA_DATASET = 1,
-        BUGS_DATASET = 2,
-        IMPROVEMENTS_DATASET = 3;
 
-
-
-function removeItemsOnSameDate(date, dataset) {
-    var itemPosition = mySpecialChart.data.labels.indexOf(date);
-    if(itemPosition >= 0) mySpecialChart.data.datasets[dataset].data.splice(itemPosition, 1);
-}
-
-function insertItemOnDataset(item, dataset) {
-    var dataset = mySpecialChart.data.datasets[dataset];
-    dataset.data.push(item);
-}
-
-function insertLabelIfNotExists(date) {
-    if(mySpecialChart.data.labels.indexOf(date) < 0) mySpecialChart.data.labels.push(date);
-}
-
-function updateChart(total, date, type) {
-    insertLabelIfNotExists(date);
-    removeItemsOnSameDate(date, type);
-    insertItemOnDataset(total, type);
-}
-
-
-function updateOnDatabase(total, date, dataset) {
-    //TODO Requisição para o banco
-}
-/*
-var enviar = addEventListener('click', function(event){
-                
-    var pega = document.querySelector('#pega-form');
-    var points = pega.points.value;
-    console.log(points);
-
-});
-*/
-
-
-
-
-   
-  //   if (pontos) updateChart(pontos, date, REMANING_DATASET);
-    // if (extras) updateChart(extras, date, EXTRA_DATASET);
-
-
-  //mySpecialChart.update();
-    
-    
-
-
-
-// });
-
-function createDataset(color, name) {
+function createDataset(color, name, dados) {
     return {
         label: name,
         backgroundColor: color,
         borderColor: color,
-        data: [],
+        data: dados,
         fill: false,
     }
 }
-
-
 
 
 //chart
@@ -77,9 +18,9 @@ var config = {
     data: {
         labels: [],
         datasets: [
-            createDataset(window.chartColors.red, 'Points'),
-            createDataset(window.chartColors.blue, 'Extra Tasks'),
-            createDataset(window.chartColors.black, 'metrica'),
+            createDataset(window.chartColors.red, 'Points', ),
+            createDataset(window.chartColors.blue, 'Extra Tasks', ),
+            createDataset(window.chartColors.black, 'metrica', ),
 
         ]
 
