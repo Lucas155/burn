@@ -1,12 +1,7 @@
 var db = require('../db/db');
 
-
-
-
 module.exports = app => {
-
   
-
   app.put('/burn/:id', (req, res) => {
 
 

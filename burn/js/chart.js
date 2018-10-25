@@ -1,6 +1,7 @@
 
-function createDataset(color, name, dados) {
+function createDataset(color, name, dados, ) {
     return {
+        
         label: name,
         backgroundColor: color,
         borderColor: color,
@@ -9,7 +10,7 @@ function createDataset(color, name, dados) {
     }
 }
 
-
+/*
 //chart
 var mySpecialChart = null;
 

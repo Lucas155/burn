@@ -14,24 +14,80 @@ $(document).ready(function () {
                 extras.push(valores.extra_task);
                 dias.push(valores.data);
             });
-            
+            console.log(pontos, extras, dias);
+
+            var config = {
+                type: 'line',
+                data: {
+                    labels: dias,
+                    datasets: [
+                        createDataset(window.chartColors.red, 'Points', pontos, dias),
+                        createDataset(window.chartColors.blue, 'Extra Tasks', extras, dias),
+                        //createDataset(window.chartColors.black, 'metrica',[20,0] ),
+
+                    ]
+
+
+                },
+
+/*
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Burndown'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }
+                }
+
+                */
+            };
+
+
+            var ctx = document.getElementById('canvas').getContext('2d');
+            mySpecialChart = new Chart(ctx, config);
+            window.myLine = mySpecialChart;
+
 
         },
         error: function (error) {
             //Tratar Erro
         }
     });
-    
-    
-    
-$('#pega-form').on('submit', function() {
-    var form = this;
-    console.log(form);
+
+
+
+    $('#pega-form').on('submit', function () {
+        var form = this;
+        console.log(form);
         $.ajax({
             url: 'http://localhost:3000/burn',
             type: 'POST', //POST GET DELETE PUT
             async: true,
-            data:$(form).serialize(),
+            data: $(form).serialize(),
             success: function (resposta) {
                 console.log(resposta);
 
@@ -41,70 +97,6 @@ $('#pega-form').on('submit', function() {
             }
         });
     });
-
-console.log(pontos);
-
-var mySpecialChart = null;
-
-var config = {
-    type: 'line',
-    data: {
-        labels: [],
-        datasets: [
-            createDataset(window.chartColors.red, 'Points', pontos),
-            createDataset(window.chartColors.blue, 'Extra Tasks',[20,30,40] ),
-            createDataset(window.chartColors.black, 'metrica',[20,0] ),
-
-        ]
-
-        
-    },
-
-
-    options: {
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Burndown'
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        scales: {
-            xAxes: [{
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Month'
-                }
-            }],
-            yAxes: [{
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Value'
-                }
-            }]
-        }
-    }
-};
-
-
-
-
-
-
-window.onload = function () {
-
-    var ctx = document.getElementById('canvas').getContext('2d');
-    mySpecialChart = new Chart(ctx, config);
-    window.myLine = mySpecialChart;
-};
 
 
 
