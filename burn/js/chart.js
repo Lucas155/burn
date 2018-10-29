@@ -1,3 +1,7 @@
+var botao = document.querySelector("#button");
+botao.addEventListener("click",function(){
+    location.reload();
+});
 
 function createDataset(color, name, dados, ) {
     return {
@@ -7,6 +11,11 @@ function createDataset(color, name, dados, ) {
         data: dados,
         fill: false,
     }
+}
+
+function asDate(data) {
+    var splitedDate = data.substring(0, 10).split('-');
+    return splitedDate[2] + '/' + splitedDate[1] + '/' + splitedDate[0];
 }
 
 $(document).ready(function () {
@@ -23,7 +32,7 @@ $(document).ready(function () {
             $.each(resposta, function (indice, valores) {
                 pontos.push(valores.points);
                 extras.push(valores.extra_task);
-                dias.push(valores.data.substring(0,10));
+                dias.push(asDate(valores.data));
             });
 
             var config = {
@@ -37,7 +46,6 @@ $(document).ready(function () {
                     ]
 
                 },
-
             };
 
             var ctx = document.getElementById('canvas').getContext('2d');
@@ -53,7 +61,8 @@ $(document).ready(function () {
 
     $('#pega-form').on('submit', function () {
         var form = this;
-        console.log(form);
+        console.log(form);//console.log(dias);
+        //console.log(typeof(dias.length));
         $.ajax({
             url: 'http://localhost:3000/burn',
             type: 'POST', //POST GET DELETE PUT
