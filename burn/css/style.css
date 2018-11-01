@@ -4,6 +4,10 @@
     font-family: 'Arial';
 }
 
+h2 {
+    text-align: center;
+}
+
 body {
     background: #F5F5F5;
 }

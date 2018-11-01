@@ -35,11 +35,6 @@
         <nav>
             <h1>Burndown</h1>
             <ul>
-
-                <li>
-                    <i class="fas fa-home"></i>
-                    <a href="">Home</a>
-                </li>
                 <li>
                     <i class="fas fa-chart-line"></i>
                     <a href="">Burndown</a>
@@ -54,6 +49,7 @@
         </nav>
 
         <main>
+                <h2 id="sprint">Burndown</h2>
 
             <div class="burndown">
 
@@ -82,7 +78,12 @@
                             <input id="date" name="data" type="date" placeholder="" class="campo campo-medio">
                         </div>
 
-                        <button id="button" type="submit" value="submit" class="enviar">Enviar</button>
+                        <div class="grupo">
+                                <label>Titulo sprint</label>
+                                <input id="titulo" type="text" name="titulo" placeholder="" class="campo campo-medio">
+                        </div>
+
+                        <button id="button" type="submit"  class="enviar">Enviar</button>
 
                     </form>
                 </div>

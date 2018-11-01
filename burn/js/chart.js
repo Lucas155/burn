@@ -1,7 +1,20 @@
-var botao = document.querySelector("#button");
-botao.addEventListener("click",function(){
-    location.reload();
-});
+    var botao = document.querySelector("#button");
+    botao.addEventListener("click",function(){
+        var titulo = document.querySelector("#pega-form");
+        console.log(titulo);
+        var sprint = titulo.titulo.value;
+        console.log(sprint);
+        if(!sprint == ""){
+            document.querySelector('#sprint').innerHTML = sprint;
+        }else{
+        var a = titulo.length;
+        var b = a-1;
+        document.querySelector('#sprint').innerHTML = titulo[b];
+    
+        }
+        //location.reload();
+    
+    });
 
 function createDataset(color, name, dados, ) {
     return {
@@ -22,6 +35,7 @@ $(document).ready(function () {
     var pontos = [];
     var extras = [];
     var dias = [];
+    var titulos = '';
 
     $.ajax({
         url: 'http://localhost:3000/burn',
@@ -33,7 +47,19 @@ $(document).ready(function () {
                 pontos.push(valores.points);
                 extras.push(valores.extra_task);
                 dias.push(asDate(valores.data));
+                titulos=(valores.titulo);
+                console.log(titulos);
+
             });
+            /*
+            var a = titulo.length;
+            var b  = 8;
+            var c = b - 1;
+            console.log(c);
+          console.log(titulo[c]);
+          console.log(titulo[titulo.length -1]);
+*/
+                        
 
             var config = {
                 type: 'line',
@@ -59,6 +85,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     $('#pega-form').on('submit', function () {
         var form = this;
         console.log(form);//console.log(dias);
@@ -77,4 +105,24 @@ $(document).ready(function () {
             }
         });
     });
+    var lucas = 72;
+    $.ajax({
+        url: 'http://localhost:3000/burn/72',
+        type: 'PUT',
+        
+        success: function (resposta) {
+            $.each(resposta, function (indice, valores) {
+                console.log(resposta);
+                pontos.push(valores.points);
+                extras.push(valores.extra_task);
+                dias.push(asDate(valores.data));
+                titulos=(valores.titulo);
+
+            });
+        },
+       
+    });
+
+
+    
 });

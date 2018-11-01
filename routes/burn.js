@@ -10,8 +10,9 @@ module.exports = app => {
     const points = req.body.points.substring(0, 150);
     const extra_task = req.body.extra_task.substring(0, 11);
     const data = req.body.data;
+    const titulo = req.body.titulo
 
-    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data='${data}' WHERE ID=${id}`, res)
+    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data='${data}',titulo='${titulo}' WHERE ID=${id}`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);
@@ -28,8 +29,9 @@ module.exports = app => {
     points = req.body.points.substring(0, 150);
     extra_task = req.body.extra_task;
     data = req.body.data;
-
-    db.executa(`INSERT INTO burn (data, points, extra_task) VALUES('${data}','${points}','${extra_task}')`, res)
+    titulo = req.body.titulo
+    
+    db.executa(`INSERT INTO burn (data, points, extra_task, titulo) VALUES('${data}','${points}','${extra_task}','${titulo}')`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);
