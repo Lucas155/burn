@@ -1,7 +1,6 @@
     var botao = document.querySelector("#button");
     botao.addEventListener("click",function(){
         var titulo = document.querySelector("#pega-form");
-        console.log(titulo);
         var sprint = titulo.titulo.value;
         console.log(sprint);
         if(!sprint == ""){
@@ -35,6 +34,7 @@ $(document).ready(function () {
     var pontos = [];
     var extras = [];
     var dias = [];
+    var id = [];
     var titulos = '';
 
     $.ajax({
@@ -48,19 +48,11 @@ $(document).ready(function () {
                 extras.push(valores.extra_task);
                 dias.push(asDate(valores.data));
                 titulos=(valores.titulo);
-                console.log(titulos);
+
 
             });
-            /*
-            var a = titulo.length;
-            var b  = 8;
-            var c = b - 1;
-            console.log(c);
-          console.log(titulo[c]);
-          console.log(titulo[titulo.length -1]);
-*/
+   
                         
-
             var config = {
                 type: 'line',
                 data: {
@@ -68,29 +60,33 @@ $(document).ready(function () {
                     datasets: [
                         createDataset(window.chartColors.red, 'Points', pontos),
                         createDataset(window.chartColors.blue, 'Extra Tasks', extras),
-                        //createDataset(window.chartColors.black, 'metrica',[20,0] ),
-                    ]
-
+                    ],
                 },
             };
-
+            
+            console.log(dias);
             var ctx = document.getElementById('canvas').getContext('2d');
             mySpecialChart = new Chart(ctx, config);
             window.myLine = mySpecialChart;
-
-
         },
         error: function (error) {
             //Tratar Erro
         }
     });
 
+    $('#canvas').click(function(e) {
+        var helpers = Chart.helpers;
+        helpers.each(mySpecialChart.scales["x-axis-0"].ticks, function (label, index) {
+            console.log(this)
+        });
 
+        
+    })
+    
 
     $('#pega-form').on('submit', function () {
         var form = this;
-        console.log(form);//console.log(dias);
-        //console.log(typeof(dias.length));
+       
         $.ajax({
             url: 'http://localhost:3000/burn',
             type: 'POST', //POST GET DELETE PUT
@@ -105,24 +101,23 @@ $(document).ready(function () {
             }
         });
     });
-    var lucas = 72;
-    $.ajax({
-        url: 'http://localhost:3000/burn/72',
-        type: 'PUT',
-        
-        success: function (resposta) {
-            $.each(resposta, function (indice, valores) {
+    
+    $('#pega-form').on('submit', function () {
+        var form = this;
+        console.log(form);
+    
+        $.ajax({
+            url: 'http://localhost:3000/burn/',
+            type: 'PUT',
+            data: $(form).serialize(),
+            success: function (resposta){
                 console.log(resposta);
-                pontos.push(valores.points);
-                extras.push(valores.extra_task);
-                dias.push(asDate(valores.data));
-                titulos=(valores.titulo);
-
+    
+            },
+    
             });
-        },
-       
-    });
-
+            
+        });
 
     
 });
