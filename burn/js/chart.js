@@ -1,19 +1,19 @@
-    var botao = document.querySelector("#button");
-    botao.addEventListener("click",function(){
-        var titulo = document.querySelector("#pega-form");
-        var sprint = titulo.titulo.value;
-        console.log(sprint);
-        if(!sprint == ""){
-            document.querySelector('#sprint').innerHTML = sprint;
-        }else{
+var botao = document.querySelector("#button");
+botao.addEventListener("click", function () {
+    var titulo = document.querySelector("#pega-form");
+    var sprint = titulo.titulo.value;
+    console.log(sprint);
+    if (!sprint == "") {
+        document.querySelector('#sprint').innerHTML = sprint;
+    } else {
         var a = titulo.length;
-        var b = a-1;
+        var b = a - 1;
         document.querySelector('#sprint').innerHTML = titulo[b];
-    
-        }
-        //location.reload();
-    
-    });
+
+    }
+    location.reload();
+
+});
 
 function createDataset(color, name, dados, ) {
     return {
@@ -47,12 +47,12 @@ $(document).ready(function () {
                 pontos.push(valores.points);
                 extras.push(valores.extra_task);
                 dias.push(asDate(valores.data));
-                titulos=(valores.titulo);
+                titulos = (valores.titulo);
 
 
             });
-   
-                        
+
+
             var config = {
                 type: 'line',
                 data: {
@@ -63,8 +63,7 @@ $(document).ready(function () {
                     ],
                 },
             };
-            
-            console.log(dias);
+
             var ctx = document.getElementById('canvas').getContext('2d');
             mySpecialChart = new Chart(ctx, config);
             window.myLine = mySpecialChart;
@@ -74,19 +73,28 @@ $(document).ready(function () {
         }
     });
 
-    $('#canvas').click(function(e) {
-        var helpers = Chart.helpers;
-        helpers.each(mySpecialChart.scales["x-axis-0"].ticks, function (label, index) {
-            console.log(this)
-        });
+    document.getElementById("canvas").onclick = function (evt) {
+        var activePoints = window.myLine.getElementsAtEventForMode(evt, 'label', window.myLine.options);
+        console.log(activePoints);
+        var firstPoint = activePoints[0];
+        var label = window.myLine.data.labels[firstPoint._index];
+        var valuePontos = window.myLine.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+        var firstPoint1 = activePoints[1];
+        var valueExtra = window.myLine.data.datasets[firstPoint1._datasetIndex].data[firstPoint1._index];
 
-        
-    })
-    
+
+
+        alert(label + ": " + valuePontos + ": " + valueExtra);
+    };
+
+  
+
+
+
 
     $('#pega-form').on('submit', function () {
         var form = this;
-       
+
         $.ajax({
             url: 'http://localhost:3000/burn',
             type: 'POST', //POST GET DELETE PUT
@@ -101,23 +109,23 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $('#pega-form').on('submit', function () {
         var form = this;
         console.log(form);
-    
+
         $.ajax({
             url: 'http://localhost:3000/burn/',
             type: 'PUT',
             data: $(form).serialize(),
-            success: function (resposta){
+            success: function (resposta) {
                 console.log(resposta);
-    
+
             },
-    
-            });
-            
+
         });
 
-    
+    });
+
+
 });
