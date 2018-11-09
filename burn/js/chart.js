@@ -74,58 +74,71 @@ $(document).ready(function () {
     });
 
     document.getElementById("canvas").onclick = function (evt) {
+        toggleUpdate();
         var activePoints = window.myLine.getElementsAtEventForMode(evt, 'label', window.myLine.options);
-        console.log(activePoints);
         var firstPoint = activePoints[0];
         var label = window.myLine.data.labels[firstPoint._index];
         var valuePontos = window.myLine.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
         var firstPoint1 = activePoints[1];
         var valueExtra = window.myLine.data.datasets[firstPoint1._datasetIndex].data[firstPoint1._index];
 
+        document.getElementById('points-update').value = valuePontos;
+        document.getElementById('extra-update').value = valueExtra;
+        document.getElementById('date-update').value = label;
 
 
-        alert(label + ": " + valuePontos + ": " + valueExtra);
-    };
-
-  
+        };
 
 
+        var botaoUpdate = document.querySelector("#pega-form-update");
+        botaoUpdate.addEventListener("submit", function (){
 
-
-    $('#pega-form').on('submit', function () {
-        var form = this;
-
-        $.ajax({
-            url: 'http://localhost:3000/burn',
-            type: 'POST', //POST GET DELETE PUT
-            async: true,
-            data: $(form).serialize(),
-            success: function (resposta) {
-                console.log(resposta);
-
-            },
-            error: function (error) {
-                //Tratar Erro
-            }
-        });
-    });
-
-    $('#pega-form').on('submit', function () {
-        var form = this;
-        console.log(form);
-
-        $.ajax({
-            url: 'http://localhost:3000/burn/',
-            type: 'PUT',
-            data: $(form).serialize(),
-            success: function (resposta) {
-                console.log(resposta);
-
-            },
-
+           
+                console.log(botaoUpdate);
+    
+                $.ajax({
+                    url: 'http://localhost:3000/burn',
+                    type: 'PUT', //POST GET DELETE PUT
+                    async: true,
+                    data: $(form).serialize(),
+                    success: function (resposta) {
+    
+    
+                    },
+                    error: function (error) {
+                        //Tratar Erro
+                    }
+                });
+            
+            
         });
 
+            
+        
+        
+
+
+
+
+        $('#pega-form').on('submit', function () {
+            var form = this;
+
+            $.ajax({
+                url: 'http://localhost:3000/burn',
+                type: 'POST', //POST GET DELETE PUT
+                async: true,
+                data: $(form).serialize(),
+                success: function (resposta) {
+
+
+                },
+                error: function (error) {
+                    //Tratar Erro
+                }
+            });
+        });
+
+
+
+
     });
-
-
-});

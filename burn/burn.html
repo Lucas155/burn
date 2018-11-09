@@ -1,6 +1,8 @@
 <html>
 
 <head>
+
+
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
 </head>
@@ -25,7 +27,7 @@
 
         <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 
-        <script src="../js/Chart.bundle.js"></script>
+       <!-- <script src="../js/Chart.bundle.js"></script> -->
         <script src="../burn/js/utils.js"></script>
 
     </head>
@@ -91,28 +93,25 @@
             </section>
 
             <section class="modal-update">
-                <a href="javascript:;" class="toggle-modal" onclick="toggleUpdate()">
-                    Update
-                    <i class="fas fa-arrow-circle-up">&nbsp;</i>
-                </a>
+                
                 <div class="bloco-update">
 
-                    <form id="pega-form" action="javascript:;" method="POST" enctype="multipart/form-data">
+                    <form id="pega-form-update" action="javascript:;" method="POST" enctype="multipart/form-data">
                         <div class="grupo">
                             <label>Points</label>
-                            <input id="remaning" name="points" type="number" placeholder="" class="campo campo-medio">
+                            <input id="points-update" value="" name="points" type="number" placeholder="" class="campo campo-medio">
                         </div>
                         <div class="grupo">
                             <label>Extra Tasks</label>
-                            <input id="extra" name="extra_task" type="number" placeholder="" class="campo campo-medio">
+                            <input id="extra-update" value="" name="extra_task" type="number" placeholder="" class="campo campo-medio">
                         </div>
                         <div class="grupo">
                             <label>Date</label>
-                            <input id="date" name="data" type="date" placeholder="" class="campo campo-medio">
+                            <input id="date-update" value="" name="data" type="" placeholder="" class="campo campo-medio">
                         </div>
 
-                        <button id="button" type="submit"  class="enviar">Enviar</button>
-                        <button id="cancela" type="submit"  class="enviar">Cancelar</button>
+                        <button id="update" type="submit"  class="enviar">Update</button>
+                        <button id="cancela" type="submit" onclick="toggleUpdate()" class="enviar">Cancelar</button>
 
 
                     </form>
