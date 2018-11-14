@@ -34,8 +34,6 @@ $(document).ready(function () {
     var pontos = [];
     var extras = [];
     var dias = [];
-    var id = [];
-    var titulos = '';
 
     $.ajax({
         url: 'http://localhost:3000/burn',
@@ -46,9 +44,7 @@ $(document).ready(function () {
             $.each(resposta, function (indice, valores) {
                 pontos.push(valores.points);
                 extras.push(valores.extra_task);
-                dias.push(asDate(valores.data));
-                titulos = (valores.titulo);
-
+                dias.push(valores.data.substring(0, 10));
 
             });
 
@@ -86,59 +82,54 @@ $(document).ready(function () {
         document.getElementById('extra-update').value = valueExtra;
         document.getElementById('date-update').value = label;
 
-
-        };
-
-
-        var botaoUpdate = document.querySelector("#pega-form-update");
-        botaoUpdate.addEventListener("submit", function (){
-
-           
-                console.log(botaoUpdate);
-    
-                $.ajax({
-                    url: 'http://localhost:3000/burn',
-                    type: 'PUT', //POST GET DELETE PUT
-                    async: true,
-                    data: $(form).serialize(),
-                    success: function (resposta) {
-    
-    
-                    },
-                    error: function (error) {
-                        //Tratar Erro
-                    }
-                });
-            
-            
-        });
-
-            
-        
-        
-
-
-
-
-        $('#pega-form').on('submit', function () {
-            var form = this;
+        $("#pega-form-update").on("submit", function () {
 
             $.ajax({
                 url: 'http://localhost:3000/burn',
-                type: 'POST', //POST GET DELETE PUT
+                type: 'PUT', //POST GET DELETE PUT
                 async: true,
-                data: $(form).serialize(),
+                data: $(this).serialize(),
                 success: function (resposta) {
-
+                    console.log(resposta);
 
                 },
                 error: function (error) {
                     //Tratar Erro
                 }
             });
+
         });
 
 
+    };
 
 
+    $('#pega-form').on('submit', function () {
+        var form = this;
+
+        $.ajax({
+            url: 'http://localhost:3000/burn',
+            type: 'POST', //POST GET DELETE PUT
+            async: true,
+            data: $(form).serialize(),
+            success: function (resposta) {
+
+
+            },
+            error: function (error) {
+                //Tratar Erro
+            }
+        });
     });
+
+
+
+
+});
+
+
+
+
+
+
+

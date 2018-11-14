@@ -2,17 +2,21 @@ var db = require('../db/db');
 
 module.exports = app => {
   
-  app.put('/burn/:id', (req, res) => {
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+  });
 
-
+  app.put('/burn', (req, res) => {
     if (!app.utils.validador.validar(app, req, res)) return false;
-    const id = parseInt(req.params.id);
     const points = req.body.points.substring(0, 150);
     const extra_task = req.body.extra_task.substring(0, 11);
     const data = req.body.data;
     const titulo = req.body.titulo
 
-    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data='${data}',titulo='${titulo}' WHERE ID=${id}`, res)
+    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data='${data}' WHERE data=${data}`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);
@@ -31,7 +35,7 @@ module.exports = app => {
     data = req.body.data;
     titulo = req.body.titulo
     
-    db.executa(`INSERT INTO burn (data, points, extra_task, titulo) VALUES('${data}','${points}','${extra_task}','${titulo}')`, res)
+    db.executa(`INSERT INTO burn (data, points, extra_task, titulo) VALUES('${data}','${points}','${extra_task}')`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);
