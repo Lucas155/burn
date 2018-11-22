@@ -4,7 +4,7 @@ module.exports = {
   {    
       req.assert('points', ' Points é obrigatorio').notEmpty().isNumeric(),
       req.assert('extra_task', 'Extra_task é obrigatorio').notEmpty().isNumeric(),
-      req.assert('data', 'Data invalida').notEmpty().isISO8601({ format:'DD-MM-YYYY'});
+      req.assert('data', 'Data invalida').notEmpty();//.isISO8601({ format:'DD-MM-YYYY'});
 
       const errors = req.validationErrors();
 

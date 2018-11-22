@@ -13,10 +13,10 @@ module.exports = app => {
     if (!app.utils.validador.validar(app, req, res)) return false;
     const points = req.body.points.substring(0, 150);
     const extra_task = req.body.extra_task.substring(0, 11);
-    const data = req.body.data;
+    const data = req.body.datas;
     const titulo = req.body.titulo
 
-    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data='${data}' WHERE data=${data}`, res)
+    db.executa(`UPDATE burn SET points='${points}', extra_task='${extra_task}', data ='${data}' WHERE data=${data}`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);
@@ -35,7 +35,7 @@ module.exports = app => {
     data = req.body.data;
     titulo = req.body.titulo
     
-    db.executa(`INSERT INTO burn (data, points, extra_task, titulo) VALUES('${data}','${points}','${extra_task}')`, res)
+    db.executa(`INSERT INTO burn (data, points, extra_task) VALUES('${data}','${points}','${extra_task}')`, res)
       .then(resposta => {
         console.log(resposta);
         res.json(resposta);

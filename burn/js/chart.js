@@ -1,16 +1,5 @@
 var botao = document.querySelector("#button");
 botao.addEventListener("click", function () {
-    var titulo = document.querySelector("#pega-form");
-    var sprint = titulo.titulo.value;
-    console.log(sprint);
-    if (!sprint == "") {
-        document.querySelector('#sprint').innerHTML = sprint;
-    } else {
-        var a = titulo.length;
-        var b = a - 1;
-        document.querySelector('#sprint').innerHTML = titulo[b];
-
-    }
     location.reload();
 
 });
@@ -83,6 +72,12 @@ $(document).ready(function () {
         document.getElementById('date-update').value = label;
 
         $("#pega-form-update").on("submit", function () {
+            var form = this;
+            console.log(form.point.value);
+            console.log(form.extra_tasks.value);
+            console.log(form.datas.value);
+
+
 
             $.ajax({
                 url: 'http://localhost:3000/burn',
@@ -106,6 +101,7 @@ $(document).ready(function () {
 
     $('#pega-form').on('submit', function () {
         var form = this;
+        
 
         $.ajax({
             url: 'http://localhost:3000/burn',
